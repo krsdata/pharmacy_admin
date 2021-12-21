@@ -1,0 +1,3 @@
+User-agent: *
+Allow: / 
+Sitemap: https://www.ninja11.in/sitemap.xml
