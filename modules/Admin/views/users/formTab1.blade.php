@@ -16,26 +16,11 @@
         <label class="control-label ">Email</label>
         <input type="email" placeholder="Email" class="form-control" name="email" value="{{ ($user->email)?$user->email:old('email')}}"> 
     </div>
-    <div class="form-group {{ $errors->first('block_referral', ' has-error') }}">
-        <label class="control-label">Block Referral</label>
-        <select class="form-control" name="block_referral">
-            <option value="0" {{($user->block_referral==0)?'selected':''}}>No</option>
-            <option value="1" {{($user->block_referral==1)?'selected':''}}>Yes</option>
-        </select> 
+     
+     <div class="form-group {{ $errors->first('password', ' has-error') }}">
+        <label class="control-label ">Password</label>
+        <input type="password" placeholder="password" class="form-control" name="password" value="{{ ($user->password)?$user->password:old('password')}}"> 
     </div>
-    <div class="form-group {{ $errors->first('affiliate_user', ' has-error') }}">
-        <label class="control-label">Affiliate User</label>
-        <select class="form-control" name="affiliate_user">
-            <option value="0" {{($user->affiliate_user==0)?'selected':''}}>No</option>
-            <option value="1" {{($user->affiliate_user==1)?'selected':''}}>Yes</option>
-        </select> 
-    </div>
-
-    <div class="form-group {{ $errors->first('affiliate_commission', ' has-error') }}">
-        <label class="control-label">Affiliate Commission(%)</label>
-        <input type="text" placeholder="Affiliate commission %" class="form-control" name="affiliate_commission" value="{{ ($user->affiliate_commission)?$user->affiliate_commission:old('affiliate_commission')}}">     
-    </div>
-
     
 
     @if($user->role_type==3)
@@ -66,31 +51,17 @@
    
      <div class="form-group {{ $errors->first('mobile_number', ' has-error') }}">
         <label class="control-label">Mobile Number</label>
-        <input type="text" placeholder="Mobile or Phone" class="form-control phone" name="mobile_number"  value="{{ ($user->mobile_number)?$user->mobile_number:old('mobile_number')}}"> </div>
-
-        <div class="form-group {{ $errors->first('referal_code', ' has-error') }}">
-        <label class="control-label">User Referral Code</label>
-        <input type="text" placeholder="Referral Code" class="form-control " name="referal_code"  value="{{ ($user->referal_code)?$user->referal_code:old('referal_code')}}"> </div>
-
-        <div class="form-group {{ $errors->first('reference_code', ' has-error') }}">
-        <label class="control-label">User Reference Code</label>
-        <input type="text" placeholder="reference code" class="form-control" name="reference_code"  value="{{ ($user->reference_code)?$user->reference_code:old('reference_code')}}"> </div>
-
-       <!--  <div class="form-group {{ $errors->first('device_id', ' has-error') }}">
-        <label class="control-label">Device ID</label>
-        <input type="text" placeholder="" class="form-control phone" name="device_id"  value="{{ ($user->device_id)?$user->device_id:old('device_id')}}"> </div> -->
+        <input type="text" placeholder="Mobile or Phone" class="form-control phone" name="mobile_number"  value="{{ ($user->mobile_number)?$user->mobile_number:old('mobile_number')}}"> </div> 
+ <!-- 
 
         <div class="form-group {{ $errors->first('user_name', ' has-error') }}">
         <label class="control-label">User Name</label>
-        <input type="text" placeholder="" class="form-control" name="user_name"  value="{{ ($user->user_name)?$user->user_name:old('user_name')}}"> </div>
-
-        <div class="form-group {{ $errors->first('team_name', ' has-error') }}">
-        <label class="control-label">Team Name</label>
-        <input type="text" placeholder="" class="form-control " name="team_name"  value="{{ ($user->team_name)?$user->team_name:old('team_name')}}"> </div>
+        <input type="text" placeholder="" class="form-control" name="user_name"  value="{{ ($user->user_name)?$user->user_name:old('user_name')}}"> </div> -->
+ <!-- 
 
         <div class="form-group {{ $errors->first('dateOfBirth', ' has-error') }}">
         <label class="control-label">Date of birth</label>
-        <input type="text" placeholder="DOB" class="form-control " name="dateOfBirth"  value="{{ ($user->dateOfBirth)?$user->dateOfBirth:old('dateOfBirth')}}"> </div>
+        <input type="text" placeholder="DOB" class="form-control " name="dateOfBirth"  value="{{ ($user->dateOfBirth)?$user->dateOfBirth:old('dateOfBirth')}}"> </div> -->
 
         <div class="form-group {{ $errors->first('state', ' has-error') }}">
         <label class="control-label">State</label>

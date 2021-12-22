@@ -31,15 +31,13 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                              
-                              @foreach($main_menu as $key => $result) 
-                                  
+                             
                                
                              <li>
-                                <a href="{{ route($result->title)}}">
+                                <a href="user">
                                     <i class="glyphicon glyphicon-th"></i> 
-                                    {{ $result->title }} </a>
-                            </li> 
-                             @endforeach
+                                     Users</a>
+                            </li>  
                         </ul>
                     </div>
                 </div>

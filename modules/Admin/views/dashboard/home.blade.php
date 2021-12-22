@@ -33,12 +33,12 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="dashboard-stat2 bordered">
                                 <div class="display">
-                                   <a href="https://ninja11.in/admin/user">
+                                   <a href="#">
                                     <div class="number">
                                         <h3 class="font-purple-soft">
-                                            <span data-counter="counterup" data-value="276">{{$users_count}}</span>
+                                            <span data-counter="counterup" data-value="276">100</span>
                                         </h3>
-                                        <small>Total Signup</small> | <span>Monthly : {{$musers_count}}</span>
+                                        <small>Total Inventory</small>   
                                     </div>
                                 </a>
                                     
@@ -54,38 +54,14 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="dashboard-stat2 bordered">
-                                <div class="display">
-                                   <a href="https://ninja11.in/admin/user">
-                                    <div class="number">
-                                        <h3 class="font-purple-soft">
-                                            <span data-counter="counterup" data-value="276">{{$total_reg}}</span>
-                                        </h3>
-                                        <small>Today Registration</small>
-                                    </div>
-                                </a>
-                                    <div class="icon">
-                                        <i class="icon-user"></i>
-                                    </div>
-                                </div>
-                                <div class="progress-info">
-                                    <div class="progress">
-                                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
-                                            <span class="sr-only">56% change</span>
-                                        </span>
-                                    </div>
-                                     
-                                </div>
-                            </div>
-                        </div>
+                      
     
                         
 
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="dashboard-stat2 bordered">
                                 <div class="display">
-                                    <a href="https://ninja11.in/admin/match">
+                                    <a href="#">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
                                             <span data-counter="counterup" data-value="567">100</span>

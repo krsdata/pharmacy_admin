@@ -1,4 +1,4 @@
-  <div class="tab-pane" id="tab_1_4">
+  <div class="tab-pane" id="tab_1_4 hide" >
                                                  
         <div class="portlet light bordered">
             <div class="portlet-title">

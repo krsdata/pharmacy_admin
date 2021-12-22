@@ -30,13 +30,7 @@
                         <span class="caption-subject font-red sbold uppercase">{{$heading ?? ''}}</span>
                     </div>
                      
-                <div class="col-md-2 pull-right">
-                                            <div style="width: 150px;" class="input-group"> 
-                                                <a href="#" data-toggle="modal" data-target="#notification"> 
-                                                    <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Send notification</button> 
-                                                </a>
-                                            </div>
-                                        </div>
+           
 
                 </div>
                 <div class="portlet-body table-responsive">
