@@ -770,4 +770,25 @@ if (App::environment('prod')) {
 
         Route::match(['get','post'], 'admin/monthly-report/{name}', 'Modules\Admin\Http\Controllers\MonthlyReportController@corporateUser');
         Route::match(['get','post'], 'admin/corporate-monthly-report', 'Modules\Admin\Http\Controllers\MonthlyReportController@index');
+
+        /*-- 22-12-21--*/
+        Route::bind('dashboardUsers', function ($value, $route) {
+            return Modules\Admin\Models\AdminLogin::find($value);
+        });
+
+        Route::resource(
+            'admin/dashboardUsers',
+            'Modules\Admin\Http\Controllers\DashboardUsersController',
+            [
+            'names' => [
+                'edit' => 'dashboardUsers.edit',
+                'show' => 'dashboardUsers.show',
+                'destroy' => 'dashboardUsers.destroy',
+                'update' => 'dashboardUsers.update',
+                'store' => 'dashboardUsers.store',
+                'index' => 'dashboardUsers',
+                'create' => 'dashboardUsers.create',
+            ]
+                ]
+        );
     });
