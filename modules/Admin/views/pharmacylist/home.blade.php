@@ -23,7 +23,7 @@
                                     </div>
                                         <div class="col-md-2 pull-right">
                                             <div class="input-group"> 
-                                                <a href="{{ route('pharmacylist.create')}}">
+                                                <a href="{{ route('pharmacyList.create')}}">
                                                     <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Add Pharmacy List</button> 
                                                 </a>
                                             </div>
@@ -40,7 +40,7 @@
                                 <div class="portlet-body">
                                     <div class="table-toolbar">
                                         <div class="row">
-                                            <form action="{{route('pharmacylist')}}" method="get" id="filter_data">
+                                            <form action="{{route('pharmacyList')}}" method="get" id="filter_data">
                                              
                                             <div class="col-md-3">
                                                 <input value="{{ (isset($_REQUEST['search']))?$_REQUEST['search']:''}}" placeholder="Search " type="text" name="search" id="search" class="form-control" >
@@ -78,11 +78,11 @@
                                                     </td>
                                                     
                                                     <td> 
-                                                        <a href="{{ route('pharmacylist.edit',$result->id)}}">
+                                                        <a href="{{ route('pharmacyList.edit',$result->id)}}">
                                                             <i class="fa fa-edit" title="edit"></i> 
                                                         </a>
 
-                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('pharmacylist.destroy', $result->id))) !!}
+                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('pharmacyList.destroy', $result->id))) !!}
 
                                                         <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
                                                         

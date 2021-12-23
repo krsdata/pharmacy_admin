@@ -7,5 +7,5 @@
       @include('packages::partials.navigation')
       <!-- Left side column. contains the logo and sidebar -->
       @include('packages::partials.sidebar')
-      @include('packages::role.home')   
+      @include('packages::pharmacyList.home')   
 @stop

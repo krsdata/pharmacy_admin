@@ -28,7 +28,7 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-dark sbold uppercase">Edit role</span>
+                                        <span class="caption-subject font-dark sbold uppercase">Edit pharmacyList</span>
                                     </div>
                                     
                                 </div>
@@ -36,8 +36,8 @@
                                     <!-- BEGIN FORM--> 
 
 
-                                {!! Form::model($role, ['method' => 'PATCH', 'route' => ['role.update', $role->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
-                                    @include('packages::role.form', compact('role'))
+                                {!! Form::model($pharmacyList, ['method' => 'PATCH', 'route' => ['pharmacyList.update', $pharmacyList->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
+                                    @include('packages::pharmacyList.form', compact('pharmacyList'))
                                 {!! Form::close() !!} 
                                     <!-- END FORM-->
                                 </div>

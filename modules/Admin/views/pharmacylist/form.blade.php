@@ -8,7 +8,7 @@
     <div class="form-group {{ $errors->first('name', ' has-error') }}">
         <label class="control-label col-md-3">Name<span class="required"> * </span></label>
         <div class="col-md-4"> 
-            {!! Form::text('name',$pharmacylist->display_name, ['class' => 'form-control','data-required'=>1])  !!} 
+            {!! Form::text('name',$pharmacylist->name, ['class' => 'form-control','data-required'=>1])  !!} 
 
             <span class="help-block">{{ $errors->first('name', ':message') }}</span>
         </div>
