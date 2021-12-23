@@ -791,4 +791,24 @@ if (App::environment('prod')) {
             ]
                 ]
         );
+        /*-- 23-12-21 by sajal--*/
+        Route::bind('pharmacyList', function ($value, $route) {
+            return Modules\Admin\Models\PharmacyList::find($value);
+        });
+
+        Route::resource(
+            'admin/pharmacyList',
+            'Modules\Admin\Http\Controllers\PharmacyListController',
+            [
+            'names' => [
+                'edit' => 'pharmacyList.edit',
+                'show' => 'pharmacyList.show',
+                'destroy' => 'pharmacyList.destroy',
+                'update' => 'pharmacyList.update',
+                'store' => 'pharmacyList.store',
+                'index' => 'pharmacyList',
+                'create' => 'pharmacyList.create',
+            ]
+                ]
+        );
     });
