@@ -36,8 +36,8 @@
                                     <!-- BEGIN FORM--> 
 
 
-                                {!! Form::model($pharmacyList, ['method' => 'PATCH', 'route' => ['pharmacyList.update', $pharmacyList->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
-                                    @include('packages::pharmacyList.form', compact('pharmacyList'))
+                                {!! Form::model($pharmacylist, ['method' => 'PATCH', 'route' => ['pharmacyList.update', $pharmacylist->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
+                                    @include('packages::pharmacylist.form', compact('pharmacylist'))
                                 {!! Form::close() !!} 
                                     <!-- END FORM-->
                                 </div>

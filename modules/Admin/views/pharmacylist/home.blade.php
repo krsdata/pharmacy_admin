@@ -61,9 +61,11 @@
                                         <thead>
                                             <tr>
                                                 <th>  Sno. </th> 
-                                                <th> Name </th>
-                                                 <th> Type </th>
-                                                <th>Created date</th> 
+                                                <th> Pharmacy Name </th>
+                                                 <th> Contact Person </th>
+                                                <th>Contact Nnmber</th>
+
+                                                <th>Create Date</th> 
                                                 <th>Action</th> 
                                             </tr>
                                         </thead>
@@ -71,8 +73,9 @@
                                         @foreach($pharmacylist as $key => $result)
                                             <tr>
                                              <th> {{++$key}} </th>
-                                             <td> {{$result->display_name }} </td>
                                              <td> {{$result->name }} </td>
+                                             <td> {{$result->contact }} </td>
+                                             <td> {{$result->phone }} </td>
                                                      <td>
                                                         {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
                                                     </td>

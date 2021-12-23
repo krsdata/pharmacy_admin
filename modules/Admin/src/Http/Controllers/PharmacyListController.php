@@ -146,11 +146,9 @@ class PharmacyListController extends Controller {
     public function update(Request $request, $id) 
     {
         $pharmacylist = PharmacyList::find($id);
-        $pharmacylist->name         =   $request->get('role_type');
-        $pharmacylist->display_name =   $request->get('name');
-        $pharmacylist->permission   =   json_encode($request->get('permission'));
-        $pharmacylist->description  =   $request->get('description');
-        $pharmacylist->modules      =   json_encode($request->get('modules'));
+        $pharmacylist->name         =   $request->get('name');
+        $pharmacylist->contact      =   $request->get('contact');
+        $pharmacylist->phone        =   $request->get('phone');
 
         $pharmacylist->save();
        
