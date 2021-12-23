@@ -69,6 +69,12 @@ Route::match(
 
 
 
+Route::match(['get'], 'barcode', function(){
+
+    return view('barcode');
+
+});
+
 
 Route::match(
     ['post','get'],
@@ -78,4 +84,3 @@ Route::match(
         'uses' => 'HomeController@getPage',
     ]
 );
-
