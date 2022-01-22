@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Modules\Admin\Models\Settings;
-// use Modules\Admin\Http\Requests\RoleRequest;
+use Modules\Admin\Http\Requests\PharmacyRequest;
 use Modules\Admin\Models\PharmacyList;
 use Input;
 use Validator;
@@ -104,14 +104,14 @@ class PharmacyListController extends Controller {
     public function store(Request $request, PharmacyList $pharmacylist) 
     {   
 
-
           $validator = Validator::make($request->all(), [
            'name' => 'required',
-           'phone' => 'required|min:11|numeric',
-           'contact' => 'required'
+           'phone' => 'required|min:10|numeric',
+           'mobile_number' => 'required|min:10|numeric',
+           'contact' => 'required',
+           'email'     => "required|email|unique:users,email"
            
-        ]);
-        /** Return Error Message **/
+        ]); 
         if ($validator->fails()) {
              return redirect()
                         ->back()
@@ -121,13 +121,11 @@ class PharmacyListController extends Controller {
         
 
 
-        $pharmacylist->name         =   $request->get('name');
-        $pharmacylist->phone =   $request->get('phone');
-        $pharmacylist->contact =   $request->get('contact');
-       
-        $pharmacylist->save();
-       return Redirect::to('admin/pharmacyList')
-                            ->with('flash_alert_notice', 'Pharmacy List was successfully created !');
+        $pharmacylist->fill(Input::all()); 
+        $pharmacylist->save(); 
+        
+        return Redirect::to('admin/pharmacyList')
+                            ->with('flash_alert_notice', 'Pharmacy   was successfully created !');
     }
     /*
      * Edit Group method
@@ -146,11 +144,8 @@ class PharmacyListController extends Controller {
     public function update(Request $request, $id) 
     {
         $pharmacylist = PharmacyList::find($id);
-        $pharmacylist->name         =   $request->get('name');
-        $pharmacylist->contact      =   $request->get('contact');
-        $pharmacylist->phone        =   $request->get('phone');
-
-        $pharmacylist->save();
+        $pharmacylist->fill(Input::all()); 
+        $pharmacylist->save(); 
        
         return Redirect::to('admin/pharmacyList')
                         ->with('flash_alert_notice', 'Pharmacy List was successfully updated!');

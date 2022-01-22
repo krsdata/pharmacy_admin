@@ -29,13 +29,24 @@ class PharmacyList extends Model
  
     protected $guarded = ['created_at' , 'updated_at' , 'id' ];
 
-    protected $fillable = ['name']; 
-    /*--User--*/
-    // public function user() 
-    // {
-    //     return $this->belongsTo('Modules\Admin\Models\User','role','id');
-    // }
-    /*--Syllabus--*/
+    protected $fillable = [
+                    'name',
+                    'contact',
+                    'phone',
+                    'dba_name',
+                    'address',
+                    'city',
+                    'state',
+                    'zipcode',
+                    'fax_number',
+                    'mobile_number',
+                    'email',
+                    'state_license_number',
+                    'state_license_exp',
+                    'dea_license_number',
+                    'dea_license_exp'
+               ]; 
+    
     
 
 }

@@ -435,44 +435,9 @@ if (App::environment('prod')) {
             return Modules\Admin\Models\MatchTeams::find($value);
         });
 
-        Route::resource(
-            'admin/matchTeam',
-            'Modules\Admin\Http\Controllers\MatchContestController',
-            [
-            'names' => [
-                'edit' => 'matchTeams.edit',
-                'show' => 'matchTeams.show',
-                'destroy' => 'matchTeams.destroy',
-                'update' => 'matchTeams.update',
-                'store' => 'matchTeams.store',
-                'index' => 'matchTeams.matchTeam',
-                'create' => 'matchTeams.create',
-            ]
-                ]
-        );
-
-        Route::bind('matchContest', function ($value, $route) {
-            return Modules\Admin\Models\MatchContest::find($value);
-        });
-
-        Route::resource(
-            'admin/matchContest',
-            'Modules\Admin\Http\Controllers\MatchContestController',
-            [
-            'names' => [
-                'edit' => 'matchContest.edit',
-                'show' => 'matchContest.show',
-                'destroy' => 'matchContest.destroy',
-                'update' => 'matchContest.update',
-                'store' => 'matchContest.store',
-                'index' => 'matchContest',
-                'create' => 'matchContest.create',
-            ]
-                ]
-        );
-
-        Route::get('admin/mytask/{id}', 'Modules\Admin\Http\Controllers\PostTaskController@mytask');
-
+       
+        
+  
         // programs
         Route::bind('program', function ($value, $route) {
             return Modules\Admin\Models\Program::find($value);
@@ -493,132 +458,8 @@ if (App::environment('prod')) {
             ]
                 ]
         );
-
-
-        // programs
-        Route::bind('reason', function ($value, $route) {
-            return Modules\Admin\Models\Reason::find($value);
-        });
-
-        Route::resource(
-            'admin/reason',
-            'Modules\Admin\Http\Controllers\ReasonController',
-            [
-            'names' => [
-                'edit' => 'reason.edit',
-                'show' => 'reason.show',
-                'destroy' => 'reason.destroy',
-                'update' => 'reason.update',
-                'store' => 'reason.store',
-                'index' => 'reason',
-                'create' => 'reason.create',
-            ]
-                ]
-        );
-
-
-        Route::get('admin/createGroup', 'Modules\Admin\Http\Controllers\ContactController@createGroup');
-        Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');
-
-
-        //  Route::bind('contacts', function($value, $route) {
-        //     return Modules\Admin\Models\Contact::find($value);
-        // });
-
-        // Route::resource('admin/contacts', 'Modules\Admin\Http\Controllers\ContactController', [
-        //     'names' => [
-        //         'edit' => 'contacts.edit',
-        //         'show' => 'contacts.show',
-        //         'destroy' => 'contacts.destroy',
-        //         'update' => 'contacts.update',
-        //         'store' => 'contacts.store',
-        //         'index' => 'contacts',
-        //         'create' => 'contacts.create',
-        //     ]
-        //         ]
-        // );
-
-
-
-        Route::get('admin/updateGroup', 'Modules\Admin\Http\Controllers\ContactGroupController@updateGroup');
-        /*---------Contact Route ---------*/
-
-        Route::bind('defaultContest', function ($value, $route) {
-            return Modules\Admin\Models\DefaultContest::find($value);
-        });
-
-        Route::resource(
-            'admin/defaultContest',
-            'Modules\Admin\Http\Controllers\DefaultContestController',
-            [
-            'names' => [
-                'edit' => 'defaultContest.edit',
-                'show' => 'defaultContest.show',
-                'destroy' => 'defaultContest.destroy',
-                'update' => 'defaultContest.update',
-                'store' => 'defaultContest.store',
-                'index' => 'defaultContest',
-                'create' => 'defaultContest.create',
-            ]
-                ]
-        );
-
-        Route::bind('transaction', function ($value, $route) {
-            return Modules\Admin\Models\Transaction::find($value);
-        });
-        Route::resource(
-            'admin/transaction',
-            'Modules\Admin\Http\Controllers\PaymentController',
-            [
-            'names' => [
-                'edit'      => 'transaction.edit',
-                'show'      => 'transaction.show',
-                'destroy'   => 'transaction.destroy',
-                'update'    => 'transaction.update',
-                'store'     => 'transaction.store',
-                'index'     => 'transaction',
-                'create'    => 'transaction.create',
-            ]
-                ]
-        );
-        Route::bind('paymentsHistory', function ($value, $route) {
-            return Modules\Admin\Models\Transaction::find($value);
-        });
-
-        Route::resource(
-            'admin/paymentsHistory',
-            'Modules\Admin\Http\Controllers\TransactionHistoryController',
-            [
-            'names' => [
-                'edit'      => 'paymentsHistory.edit',
-                'show'      => 'paymentsHistory.show',
-                'destroy'   => 'paymentsHistory.destroy',
-                'update'    => 'paymentsHistory.update',
-                'store'     => 'paymentsHistory.store',
-                'index'     => 'paymentsHistory',
-                'create'    => 'paymentsHistory.create',
-            ]
-                ]
-        );
-        Route::bind('payments', function ($value, $route) {
-            return Modules\Admin\Models\Transaction::find($value);
-        });
-
-        Route::resource(
-            'admin/payments',
-            'Modules\Admin\Http\Controllers\TransactionController',
-            [
-            'names' => [
-                'edit'      => 'payments.edit',
-                'show'      => 'payments.show',
-                'destroy'   => 'payments.destroy',
-                'update'    => 'payments.update',
-                'store'     => 'payments.store',
-                'index'     => 'payments',
-                'create'    => 'payments.create',
-            ]
-                ]
-        );
+  
+      
 
         Route::bind('setting', function ($value, $route) {
             return Modules\Admin\Models\Settings::find($value);
@@ -702,65 +543,7 @@ if (App::environment('prod')) {
                 ]
         );
 
-        Route::bind('flashMatch', function ($value, $route) {
-            return Modules\Admin\Models\FlashMatch::find($value);
-        });
-
-        Route::resource(
-            'admin/flashMatch',
-            'Modules\Admin\Http\Controllers\FlashMatchController',
-            [
-            'names' => [
-                'edit' => 'flashMatch.edit',
-                'show' => 'flashMatch.show',
-                'destroy' => 'flashMatch.destroy',
-                'update' => 'flashMatch.update',
-                'store' => 'flashMatch.store',
-                'index' => 'flashMatch',
-                'create' => 'flashMatch.create',
-            ]
-                ]
-        );
-
-        Route::bind('report', function ($value, $route) {
-            return Modules\Admin\Models\Report::find($value);
-        });
-
-        Route::resource(
-            'admin/report',
-            'Modules\Admin\Http\Controllers\ReportController',
-            [
-            'names' => [
-                'edit' => 'report.edit',
-                'show' => 'report.show',
-                'destroy' => 'report.destroy',
-                'update' => 'report.update',
-                'store' => 'report.store',
-                'index' => 'report',
-                'create' => 'report.create',
-            ]
-                ]
-        );
-
-        Route::bind('players', function ($value, $route) {
-            return Modules\Admin\Models\Player::find($value);
-        });
-
-        Route::resource(
-            'admin/players',
-            'Modules\Admin\Http\Controllers\PlayerController',
-            [
-            'names' => [
-                'edit' => 'players.edit',
-                'show' => 'players.show',
-                'destroy' => 'players.destroy',
-                'update' => 'players.update',
-                'store' => 'players.store',
-                'index' => 'players',
-                'create' => 'players.create',
-            ]
-                ]
-        ); 
+        
 
         Route::match(['get','post'], 'admin/permission', 'Modules\Admin\Http\Controllers\RoleController@permission');
 
@@ -811,4 +594,91 @@ if (App::environment('prod')) {
             ]
                 ]
         );
+
+         /*-- 24-12-21 by sajal--*/
+        Route::bind('inventory', function ($value, $route) {
+            return Modules\Admin\Models\Inventory::find($value);
+        });
+
+        Route::resource(
+            'admin/inventory',
+            'Modules\Admin\Http\Controllers\InventoryController',
+            [
+            'names' => [
+                'edit' => 'inventory.edit',
+                'show' => 'inventory.show',
+                'destroy' => 'inventory.destroy',
+                'update' => 'inventory.update',
+                'store' => 'inventory.store',
+                'index' => 'inventory',
+                'create' => 'inventory.create'
+            ]
+                ]
+        );
+
+         Route::match(['get','post'],'admin/inventory-return', 
+            [ 
+                'as' => 'inventory-return', 
+                'uses' => 'Modules\Admin\Http\Controllers\InventoryController@inventoryReturn'
+            ]
+        );
+
+        Route::match(['get','post'],'admin/inventory-intake', 
+            [ 
+                'as' => 'intake', 
+                'uses' => 'Modules\Admin\Http\Controllers\InventoryController@intake'
+            ]
+        );
+
+        Route::match(['get','post'],'admin/unknown-item', 
+            [ 
+                'as' => 'unknown-item', 
+                'uses' => 'Modules\Admin\Http\Controllers\InventoryController@unknownItem'
+            ]
+        );
+
+        
+
+        Route::match(['get','post'],'admin/return_store', 
+            [ 
+                'as' => 'return_store', 
+                'uses' => 'Modules\Admin\Http\Controllers\InventoryController@return_store'
+            ]
+        );
+
+        /*-- 25-12-21 by sajal--*/
+        Route::bind('boxList', function ($value, $route) {
+            return Modules\Admin\Models\BoxList::find($value);
+        });
+
+        Route::resource(
+            'admin/boxList',
+            'Modules\Admin\Http\Controllers\BoxListController',
+            [
+            'names' => [
+                'edit' => 'boxList.edit',
+                'show' => 'boxList.show',
+                'destroy' => 'boxList.destroy',
+                'update' => 'boxList.update',
+                'store' => 'boxList.store',
+                'index' => 'boxList',
+                'create' => 'boxList.create'
+            ]
+                ]
+        );
+
+        Route::match(['get','post'],'admin/return_save', 
+            [ 
+                'as' => 'return_save', 
+                'uses' => 'Modules\Admin\Http\Controllers\InventoryController@return_save'
+            ]
+        );
+
+        Route::match(['get','post'],'admin/inventory-box-details', 
+            [ 
+                'as' => 'inventory-box-details', 
+                'uses' => 'Modules\Admin\Http\Controllers\BoxListController@inventoryBoxDetails'
+            ]
+        );
+
     });
