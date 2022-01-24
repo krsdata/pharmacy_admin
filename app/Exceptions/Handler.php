@@ -75,16 +75,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     { 
        // dd($exception);   
-       if ($exception instanceof \BadMethodCallException) {
- 
-          echo  json_encode(
-                    [
-                        'message'       => 'Bad request'
-                    ]
-                );
-           exit();
         
-      }
       if ($exception instanceof ThrottleRequestsException) {
 
           $data['url']        = url($request->getrequestUri());
@@ -102,19 +93,11 @@ class Handler extends ExceptionHandler
       
       }
       if($request->is('admin/*')){
-            if ($exception instanceof ViewException) {
-                $exception = $exception->getMessage();
-                echo $exception;
-                exit();
-            }else{    
+               
                 $exception = $exception->getMessage();
                 $exception = ($exception=="")?"Page not found!":$exception;
                 return redirect('admin/error?message='.Str::slug($exception))->with('flash_alert_notice', $exception);
-            }
-
-            $helper = new Helper;
-            $send_status = $helper->notifyErrorToAdmin('⚠️ Alert ⛔⚠️😱',
-          $exception->getMessage().'.'.$exception->getfile().'. Line number :'.url($request->getrequestUri()));
+            
         }
        
         

@@ -55,132 +55,15 @@ class AdminController extends Controller {
     public function index(Request $request) 
     { 
         $page_title = "";
-        $page_action = "";
-       
-        $professor = User::where('role_type',1)->count();
-         
-        $user = User::count();
+        $page_action = ""; 
         $viewPage = "Admin";
 
         $users_count        =  User::count();
-        $category_grp_count =  Category::where('parent_id',0)->count();
-        $category_count     =  Category::where('parent_id','!=',0)->count();
+        $parmacy_count        =  \DB::table('pharmacy_list')->count();
         
-        $musers_count =  User::where('customer_type',0)
-                                ->whereMonth('created_at', '=', date('m'))
-                                ->whereYear('created_at', date('Y'))
-                                ->count();
-
-            
-        $match_1 = Matches::where('status',1)
-                    ->whereDate('date_start',\Carbon\Carbon::today())
-                    ->count();
-        
-        $hero = User::where('customer_type',3)->pluck('id')->toArray();
-        $hero[] = 285;
-        $hero[] = 262;
-        $hero[] = 361;
-        $hero[] = 11556;
-        $hero[] = 9112;
-        
-        $cj = 0;
-        $tinc = 0;
-        $mid = Matches::whereMonth('date_start',date('m'))
-                        ->whereYear('date_start',date('Y'))
-                        ->whereIn('status',[2])
-                        ->get();
-
-        $today_profits = Matches::
-                        whereDate('date_start',\Carbon\Carbon::today())
-                        ->select('profit','loss') 
-                        ->whereIn('status',[2,3])
-                        ->get(); 
-                        
-        $today_profit = $today_profits->sum('profit') - $today_profits->sum('loss'); 
-
-        $extra_income = $mid->sum('profit')-$mid->sum('loss'); 
-
-        $match_2 = Matches::where('status',2)->count();
-        $match_3 = Matches::where('status',3)->count();
-
-        $deposit = WalletTransaction::where('payment_type',3)->sum('amount');
-
-        $monthly_deposit = WalletTransaction::where('payment_type',3)
-                ->whereMonth('created_at',date('m'))
-                ->whereYear('created_at', date('Y'))
-                ->sum('amount');
-
-        $prize = WalletTransaction::where('payment_type','4')->sum('amount');
-
-        $refunded = round(WalletTransaction::where('payment_type_string','Refunded')->sum('amount'),2);
-
-        $referral = WalletTransaction::where('payment_type_string','referral')->sum('amount');
-
-        $today_deposit = round(WalletTransaction::where('payment_type_string','Deposit')
-            ->whereDate('created_at',\Carbon\Carbon::today())
-            ->sum('amount'),2);
 
 
-
-
-        $join_contest_amt = WalletTransaction::where('payment_type',6)->sum('amount');
-
-        $today_withdrawal = WalletTransaction::where('payment_type',5)->sum('amount');
-
-        $today_withdrawal2 = WalletTransaction::where('payment_type',5)->whereDate('created_at',\Carbon\Carbon::today())->sum('amount');
-
-         $monthly_withdrawal = WalletTransaction::where('payment_type',5)
-                    ->whereMonth('created_at',date('m'))
-                    ->whereYear('created_at', date('Y'))
-                    ->sum('amount');
-
-        $revenue = (int)($deposit - $today_withdrawal);
-
-        $create_count = CreateTeam::count();
-
-        $joinContest_count = JoinContest::count(); 
-       // dd($create_count);
-        $match = Matches::count();
-
-        $contest_types = \DB::table('contest_types')->count();
-        $banner = \DB::table('banners')->count();
-
-        $total_user = \DB::table('eventLogs')
-                ->whereDate('created_at',\Carbon\Carbon::today())
-                ->groupBy('user_id')
-                ->pluck('user_id')
-                ->count();
-
-        $total_reg = \DB::table('users')
-                ->whereDate('created_at',\Carbon\Carbon::today())
-                ->count();
-
-
-        $total_bonus = WalletTransaction::whereIn('payment_type',[1,8,2])->sum('amount');
-        $bonus = Wallet::where('payment_type',1)->sum('amount');
-        $total_bonus_used = $bonus;
-
-
-        $today_deposit_paytm = round(WalletTransaction::where('payment_type_string','Deposit')
-            ->where('payment_mode','paytm')
-            ->whereDate('created_at',\Carbon\Carbon::today())
-            ->sum('amount'),2);
-
-        $today_deposit_razorpay = round(WalletTransaction::where('payment_type_string','Deposit')
-            ->where('payment_mode','razorpay')
-            ->whereDate('created_at',\Carbon\Carbon::today())
-            ->sum('amount'),2);
-
-         $affiliate = \DB::table('affiliate_programs')->sum('amount'); 
-
-         $pending_doc = \DB::table('verify_documents')
-                            ->where('status',1)
-                            ->count(); 
-
-        $monthly_revenue = ($monthly_deposit-$monthly_withdrawal);
-
-
-        return view('packages::dashboard.index',compact('joinContest_count','create_count','today_deposit','category_count','users_count','category_grp_count','page_title','page_action','viewPage','match_1','match_2','match_3','match','contest_types','banner','deposit','prize','refunded','referral','join_contest_amt','total_user','today_withdrawal','total_bonus','total_bonus_used','total_reg','today_deposit_paytm','today_deposit_razorpay','revenue','affiliate','today_withdrawal2','pending_doc','extra_income','monthly_withdrawal','monthly_deposit','monthly_revenue','musers_count','tinc','cj','today_profit')); 
+        return view('packages::dashboard.index',compact('users_count','parmacy_count')); 
     }
 
    public function profile(Request $request,Admin $users)

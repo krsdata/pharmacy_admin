@@ -61,7 +61,61 @@ class InventoryController extends Controller {
         $page_title = 'Inventory';
         $page_action = 'View Inventory';
 
-        return view('packages::inventory.unknownItem', compact('inventory', 'page_title', 'page_action'));                                         
+        if($request->method()=="POST")
+        { 
+            $pid  = $request->pharmacy_id; 
+            if($request->get('return_item')=='return_item')
+            {
+
+               $return_item = \DB::table('inventory')
+                        ->where(function($query) use($request){
+                            if($request->ndc)
+                            {
+                                $query->where('ndc',$request->ndc);
+                            } 
+                             if($request->qty)
+                            {
+                                 $query->where('qty',$request->qty);
+                            }
+                             if($request->lot)
+                            {
+                                $query->where('lot',$request->lot); 
+                            } if($request->lot)
+                            {
+                                $query->where('exp_date',$request->exp_date); 
+                            } 
+                            
+                        })->where('pharmacy_id',$request->pharmacy_id)
+                        ->first(); 
+
+                $data = [];
+                if($return_item)
+                {
+                    foreach($return_item as $key => $value)
+                    {   
+                        if( $key=="id")
+                        {
+                            continue;
+                        }
+                        $data[$key] = $value;
+                    }
+
+                    if(count($data))
+                    {
+                        \DB::table('inventory')->insert($data);      
+                    }
+                }else{
+                   return Redirect::to('admin/unknown-item?pharmacy='.$pid);
+                }
+
+            }else{
+                 \DB::table('inventory')->insert($request->all()); 
+            } 
+
+            return Redirect::to('admin/inventory-intake?pharmacy_name='.$pid);
+        }
+
+        return view('packages::inventory.unknownItem', compact('inventory', 'page_title', 'page_action','request'));                                         
     }
 
     /*
@@ -180,12 +234,27 @@ class InventoryController extends Controller {
         
     }
 
-     public function intake(InventoryIntake $inventoryIntake)  
+     public function intake(InventoryIntake $inventoryIntake, Request $request)  
     {
         $page_title = 'Inventory Return';
         $page_action = 'Intake Inventory';
 
-        return view('packages::inventory.intake', compact('inventoryIntake','page_title', 'page_action'));
+        $pid = $request->get('pharmacy_name');
+
+        $inventory = \DB::table('inventory')->where('pharmacy_id',$pid)
+                        ->get()->groupBy('class');
+
+        
+        if($request->method()=="POST"){
+            $remove_item = $request->get('remove_it');
+
+            \DB::table('inventory')->where('id',$remove_item)
+                        ->delete();
+            return Redirect::to('admin/inventory-intake?pharmacy_name='.$pid);
+        }
+
+
+        return view('packages::inventory.intake', compact('inventoryIntake','page_title', 'page_action','request','inventory'));
      }
 
       public function return_store(Request $request, InventoryIntake $inventoryIntake) 

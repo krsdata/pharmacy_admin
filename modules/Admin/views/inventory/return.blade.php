@@ -33,7 +33,7 @@
                                 </div>
 <div class="portlet-body">
    
-    <form method="POST" action="{{url('admin/inventory-intake')}}" accept-charset="UTF-8" class="form-horizontal user-form" id="user-form" enctype="multipart/form-data" novalidate="novalidate">
+    <form method="GET" action="{{url('admin/inventory-intake')}}" accept-charset="UTF-8" class="form-horizontal user-form" id="user-form" enctype="multipart/form-data" novalidate="novalidate">
 
       <input name="_token" type="hidden" value="{{csrf_token()}}">
                                      

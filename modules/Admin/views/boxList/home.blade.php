@@ -99,9 +99,9 @@
                                                 <th>  Box# </th> 
                                                 <th> Status </th>
                                                  <th> Type </th>
-                                                <th>Pharmacy</th>
+                                                <th>Pharmacy Name</th>
 
-                                                <th>Close</th> 
+                                                <th>Start</th> 
                                                 <th>Action/ Batch#</th> 
                                             </tr>
                                         </thead>
@@ -109,23 +109,28 @@
                                         @foreach($boxlist as $key => $result)
                                             <tr>
                                              <th> {{++$key}} </th>
-                                             <td> {{$result->name }} </td>
-                                             <td> {{$result->contact }} </td>
-                                             <td> {{$result->phone }} </td>
+                                             <td> Open </td>
+                                             <td> {{$result->class }} </td>
+                                             <td>{{$pharmacylist[$result->pharmacy_id]}}</td>
                                                      <td>
-                                                        {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
+                                                        {!! Carbon\Carbon::parse($result->created_on)->format('Y-m-d'); !!}
                                                     </td>
                                                     
                                                     <td> 
-                                                        <a href="{{ route('boxList.edit',$result->id)}}">
+                                                        <a href="#">
                                                             <i class="fa fa-edit" title="edit"></i> 
-                                                        </a>
+                                                        </a> 
 
-                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('boxList.destroy', $result->id))) !!}
+ <form  onSubmit="return confirm('Do you want to submit?') ">
 
-                                                        <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
+  <button class='delbtn btn btn-danger btn-xs' type="submit" >
+    <i class="fa fa-fw fa-trash" title="Delete"></i>
+  </button>
+</form>
+
                                                         
-                                                         {!! Form::close() !!}
+                                                       
+ 
 
                                                     </td>
                                                

@@ -36,9 +36,9 @@
                                    <a href="#">
                                     <div class="number">
                                         <h3 class="font-purple-soft">
-                                            <span data-counter="counterup" data-value="276">100</span>
+                                            <span data-counter="counterup" data-value="276">{{$users_count}}</span>
                                         </h3>
-                                        <small>Total Inventory</small>   
+                                        <small>Total Clients</small>   
                                     </div>
                                 </a>
                                     
@@ -64,7 +64,7 @@
                                     <a href="#">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <span data-counter="counterup" data-value="567">100</span>
+                                            <span data-counter="counterup" data-value="567">{{$parmacy_count}}</span>
                                         </h3>
                                         <small> Total Pharmacy </small>
                                     </div>
@@ -123,18 +123,9 @@
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                        <i class="icon-bell"></i> Alerts </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                        <i class="icon-info"></i> Notifications </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                        <i class="icon-speech"></i> Activities </a>
-                                </li>
+                                
+                             
+                                < 
                                 <li class="divider"></li>
                                 <li>
                                     <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">

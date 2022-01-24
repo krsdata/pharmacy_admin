@@ -62,7 +62,7 @@ class BoxListController extends Controller {
     { 
         
         $page_title = 'Box List';
-        $page_action = 'View Box List                                                                                                                                                                                                                               '; 
+        $page_action = 'View Box List                                                                                          '; 
         
         // Search by name ,email and group
         $search = Input::get('search'); 
@@ -70,18 +70,20 @@ class BoxListController extends Controller {
 
             $search = isset($search) ? Input::get('search') : '';
                
-            $boxlist = BoxList::where(function($query) use($search) {
+            $boxlist = \DB::table('inventory')->where(function($query) use($search) {
                         if (!empty($search)) {
                             $query->Where('name', 'LIKE', "%$search%");
                             $query->orWhere('contact', 'LIKE', "%$search%");
                         }
-                        
-                    })->orderBy('name','asc')->Paginate($this->record_per_page);
+                    })->orderBy('created_on','desc')->Paginate(30);
         } else {
-            $boxlist  = BoxList::orderBy('name','asc')->Paginate(10);  
+            $boxlist  = \DB::table('inventory')->orderBy('created_on','desc')->Paginate(30);  
         } 
 
-         return view('packages::boxList.index', compact('boxlist', 'page_title', 'page_action'));
+        $pharmacylist = \DB::table('pharmacy_list')->pluck('name','id');
+         
+
+         return view('packages::boxList.index', compact('boxlist', 'page_title', 'page_action','pharmacylist'));
    
     }
 
