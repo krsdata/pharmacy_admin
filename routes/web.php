@@ -75,7 +75,7 @@ Route::match(['get'], 'barcode', function(){
 
 });
 
-
+/*
 Route::match(
     ['post','get'],
     '/{name}',
@@ -83,4 +83,4 @@ Route::match(
         'as'   => 'contentspage',
         'uses' => 'HomeController@getPage',
     ]
-);
+);*/

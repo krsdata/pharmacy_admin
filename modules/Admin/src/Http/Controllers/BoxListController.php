@@ -62,18 +62,17 @@ class BoxListController extends Controller {
     { 
         
         $page_title = 'Box List';
-        $page_action = 'View Box List                                                                                          '; 
-        
+        $page_action = 'View Box List';  
         // Search by name ,email and group
-        $search = Input::get('search'); 
-        if ((isset($search) && !empty($search)) ) {
-
-            $search = isset($search) ? Input::get('search') : '';
-               
-            $boxlist = \DB::table('inventory')->where(function($query) use($search) {
-                        if (!empty($search)) {
-                            $query->Where('name', 'LIKE', "%$search%");
-                            $query->orWhere('contact', 'LIKE', "%$search%");
+        $search = Input::get('search');  
+        if ($search) { 
+             
+            $boxlist = \DB::table('inventory')->where(function($query) use($request) {
+                        if (!empty($request->pharmacy)) { 
+                            $query->where('pharmacy_id', $request->pharmacy);
+                        }
+                        if (!empty($request->type)) { 
+                            $query->where('class', $request->type);
                         }
                     })->orderBy('created_on','desc')->Paginate(30);
         } else {

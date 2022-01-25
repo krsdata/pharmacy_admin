@@ -58,20 +58,27 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
+                                                <input type="hidden" name="search" value="true">
                                             <p style="font-weight:bold;margin-bottom:3px;">Type</p>
                                                 <select name="type" class="form-control">
                                                  <option value="">All</option>
-                                                 <option value="">RX</option>
-                                                 <option value="">CII</option>
-                                                 <option value="">CII-V</option>
-                                                 <option value="">OTC</option>
+                                                 <option value="RX">RX</option>
+                                                 <option value="CII">CII</option>
+                                                 <option value="CIII-V">CIII-V</option>
+                                                 <option value="OTC">OTC</option>
                                                 </select>
                                             </div>
                                              <div class="col-md-3">
                                             <p style="font-weight:bold;margin-bottom:3px;">Pharmacy</p>
                                                 <select name="pharmacy" class="form-control">
-                                                 <option value="">N&J Pharmacy</option>
-                                                 <option value="">21 Century Pharmacy</option>
+                                            <option value="">Select Pharmacy</option> 
+
+                                            @foreach($pharmacylist as $key=>$value)
+
+                                            <option value="{{$key}}">
+                                            {{ $value }}        
+                                            </option>
+                                            @endforeach
                                                 </select>
                                             </div>
                                               <div class="col-md-12" style="margin-top:20px;"></div>
@@ -120,13 +127,13 @@
                                                         <a href="#">
                                                             <i class="fa fa-edit" title="edit"></i> 
                                                         </a> 
-
+<!-- 
  <form  onSubmit="return confirm('Do you want to submit?') ">
 
   <button class='delbtn btn btn-danger btn-xs' type="submit" >
     <i class="fa fa-fw fa-trash" title="Delete"></i>
   </button>
-</form>
+</form> -->
 
                                                         
                                                        
