@@ -65,7 +65,8 @@
                                                 <th>UOM</th> 
                                                 <th>Full/Partial</th> 
                                                 <th>total</th>
-                                                 <th>Lot #Exp Date</th>
+                                                 <th>#Lot </th>
+                                                 <th> Exp Date</th>
                                                  <th>Action</th>
                                             </tr>
                                         </thead>
@@ -77,9 +78,18 @@
                                             <th>  {{$result->package_size}}    </th>
                                              <th> {{$result->qty}}  </th>
                                             <th>  {{$result->package_qty}}</th>
-                                            <th> {{$result->unit_size}}  </th>
+                                            <th>
+                @if($result->unit_size==1)
+                    EA
+                @elseif($result->unit_size==2)
+                    ML
+                @elseif($result->unit_size==3)
+                GM
+                @endif
+                                               </th>
                                             <th> {{$result->full_value}}</th> 
-                                            <th> {{$result->total}}</th> 
+                                            <th> ${{$result->qty*$result->full_value}}</th>
+                                            <th> {{$result->lot}}</th> 
                                             <th>{{$result->exp_date}} </th>
                                             <th> 
                                                 <form  method="POST" onSubmit="return confirm('Do you want to submit?') "> 
@@ -91,6 +101,12 @@
                                                     <i class="fa fa-fw fa-trash" title="Delete"></i>
                                                   </button>
                                                 </form>
+                                            </th>
+                                            <th>
+                                                <a href="{{url('admin/unknown-item?inventory_id')}}={{$result->id}}&edit=true">
+                                                            <i class="fa fa-edit" title="edit"></i> 
+                                                        </a>
+
                                             </th>
                                         </tr>
                                     </thead> 

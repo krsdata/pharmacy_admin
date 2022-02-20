@@ -62,57 +62,73 @@ class InventoryController extends Controller {
         $page_action = 'View Inventory';
 
         if($request->method()=="POST")
-        { 
-            $pid  = $request->pharmacy_id; 
-            if($request->get('return_item')=='return_item')
+        {
+
+            if($request->inventory_id && $request->pharmacy_id)
             {
-
-               $return_item = \DB::table('inventory')
-                        ->where(function($query) use($request){
-                            if($request->ndc)
-                            {
-                                $query->where('ndc',$request->ndc);
-                            } 
-                             if($request->qty)
-                            {
-                                 $query->where('qty',$request->qty);
-                            }
-                             if($request->lot)
-                            {
-                                $query->where('lot',$request->lot); 
-                            } if($request->lot)
-                            {
-                                $query->where('exp_date',$request->exp_date); 
-                            } 
-                            
-                        })->where('pharmacy_id',$request->pharmacy_id)
-                        ->first(); 
-
-                $data = [];
-                if($return_item)
-                {
-                    foreach($return_item as $key => $value)
-                    {   
-                        if( $key=="id")
-                        {
-                            continue;
-                        }
-                        $data[$key] = $value;
-                    }
-
-                    if(count($data))
-                    {
-                        \DB::table('inventory')->insert($data);      
-                    }
-                }else{
-                   return Redirect::to('admin/unknown-item?pharmacy='.$pid);
-                }
+                $idata = $request->except('inventory_id');
+                $pid   = $request->pharmacy_id;
+                \DB::table('inventory')
+                ->where('id',$request->inventory_id)
+                ->update($idata);
 
             }else{
-                 \DB::table('inventory')->insert($request->all()); 
-            } 
 
+                $pid  = $request->pharmacy_id; 
+
+                if($request->get('return_item')=='return_item')
+                {   
+                   $return_item = \DB::table('inventory')
+                            ->where(function($query) use($request){
+                                if($request->ndc)
+                                {
+                                    $query->where('ndc',$request->ndc);
+                                } 
+                                 if($request->qty)
+                                {
+                                     $query->where('qty',$request->qty);
+                                }
+                                 if($request->lot)
+                                {
+                                    $query->where('lot',$request->lot); 
+                                } if($request->lot)
+                                {
+                                    $query->where('exp_date',$request->exp_date); 
+                                } 
+                                
+                            })->where('pharmacy_id',$request->pharmacy_id)
+                            ->first(); 
+
+                    $data = [];
+                    if($return_item)
+                    {
+                        foreach($return_item as $key => $value)
+                        {   
+                            if( $key=="id")
+                            {
+                                continue;
+                            }
+                            $data[$key] = $value;
+                        }
+
+                        if(count($data))
+                        {
+                            \DB::table('inventory')->insert($data);      
+                        }
+                    }else{
+                       return Redirect::to('admin/unknown-item?pharmacy='.$pid.'&ndc='.$request->ndc);
+                    }
+
+                }else{
+                     \DB::table('inventory')->insert($request->all()); 
+                } 
+            }
             return Redirect::to('admin/inventory-intake?pharmacy_name='.$pid);
+        }
+
+        if($request->get('inventory_id'))
+        {
+            $inventory = \DB::table('inventory')->where('id',$request->get('inventory_id'))->first();
         }
 
         return view('packages::inventory.unknownItem', compact('inventory', 'page_title', 'page_action','request'));                                         

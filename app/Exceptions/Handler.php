@@ -75,7 +75,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     { 
-       // dd($exception);
+        //dd($exception);
         return Redirect::to(url('admin/error'));
 	 
     }

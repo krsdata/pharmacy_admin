@@ -124,7 +124,7 @@
                                                     </td>
                                                     
                                                     <td> 
-                                                        <a href="#">
+                                                        <a href="{{url('admin/inventory-intake?pharmacy_name')}}={{$result->pharmacy_id}}&edit=true">
                                                             <i class="fa fa-edit" title="edit"></i> 
                                                         </a> 
 <!-- 
@@ -135,6 +135,7 @@
   </button>
 </form> -->
 
+ 
                                                         
                                                        
  
