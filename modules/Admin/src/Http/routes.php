@@ -338,22 +338,22 @@ if (App::environment('prod')) {
 
         /*---------Contact Route ---------*/
 
-         Route::bind('notification', function ($value, $route) {
-            return Modules\Admin\Models\Notification::find($value);
+         Route::bind('contact', function ($value, $route) {
+            return Modules\Admin\Models\Contact::find($value);
         });
 
         Route::resource(
-            'admin/notification',
-            'Modules\Admin\Http\Controllers\NotificationController',
+            'admin/contact',
+            'Modules\Admin\Http\Controllers\ContactController',
             [
             'names' => [
-                'edit' => 'notification.edit',
-                'show' => 'notification.show',
-                'destroy' => 'notification.destroy',
-                'update' => 'notification.update',
-                'store' => 'notification.store',
-                'index' => 'notification',
-                'create' => 'notification.create',
+                'edit' => 'contact.edit',
+                'show' => 'contact.show',
+                'destroy' => 'contact.destroy',
+                'update' => 'contact.update',
+                'store' => 'contact.store',
+                'index' => 'contact',
+                'create' => 'contact.create',
             ]
                 ]
         );
@@ -411,6 +411,9 @@ if (App::environment('prod')) {
         );
 
         Route::get('admin/comment/showComment/{id}', 'Modules\Admin\Http\Controllers\CommentController@showComment');
+
+        
+        Route::post('admin/import', 'Modules\Admin\Http\Controllers\PharmacyListController@import');
 
         Route::resource(
             'admin/complaint',

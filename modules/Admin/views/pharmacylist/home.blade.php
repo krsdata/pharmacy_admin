@@ -20,7 +20,7 @@
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
                                         <span class="caption-subject font-red sbold uppercase">Pharmacy List</span>
-                                    </div>
+                                    </div>  2
                                         <div class="col-md-2 pull-right">
                                             <div class="input-group"> 
                                                 <a href="{{ route('pharmacyList.create')}}">
@@ -28,6 +28,11 @@
                                                 </a>
                                             </div>
                                         </div>  
+                                        <div class="col-md-2 pull-right">
+                                            <div   class="input-group">  
+                                             <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import xPharmacy </a> 
+                                            </div>
+                                        </div> 
                                 </div>
                                   
                                     @if(Session::has('flash_alert_notice'))
@@ -115,3 +120,31 @@
             <!-- END QUICK SIDEBAR -->
         </div>
 
+        
+<form id="import_contact" action="" method="post" encytype="multipart/form-data">
+ <div id="responsive2" class="modal fade" tabindex="-1" data-width="300">
+    <div class="modal-dialog"> 
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #efeb10 !important">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Import Pharmacy</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Import</h4>
+                        <span id="error_msg2"></span>
+                        <p>
+                            <input type="file" class="col-md-12 form-control" name="importContact" id="importContact"> </p> 
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+            
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                <button type="submit" class="btn red" id="csave" >Import Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

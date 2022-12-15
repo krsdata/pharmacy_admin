@@ -544,7 +544,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    var action = "admin/contact/import";
+    var action = "admin/import";
     
  
         $("#import_contact").on('submit',(function(e){
@@ -564,8 +564,8 @@ $(document).ready(function(){
                     return false;
                  }else{
                      $('#responsive2').modal('hide');
-                     bootbox.alert('Contact imported successfully',function(){
-                         var u =url+'/admin/contact';
+                     bootbox.alert('Data imported successfully',function(){
+                         var u =url+'/admin/pharmacyList';
                          console.log(u);
                          setTimeout(function(){ window.location.assign(u);},100);
                          

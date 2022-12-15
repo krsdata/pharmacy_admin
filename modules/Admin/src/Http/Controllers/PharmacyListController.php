@@ -85,6 +85,67 @@ class PharmacyListController extends Controller {
    
     }
 
+
+    public function import(Request $request)
+    {
+        try{
+            $file = $request->file('importContact');
+            
+            if($file==NULL){
+                echo json_encode(['status'=>0,'message'=>'Please select  csv file!']); 
+                exit(); 
+            }
+            $ext = $file->getClientOriginalExtension();
+            if($file==NULL || $ext!='csv'){
+                echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
+                exit(); 
+            }
+            $mime = $file->getMimeType();   
+           
+            $upload = $this->uploadFile($file);
+           
+            $rs =    \Excel::load($upload, function($reader)use($request) {
+
+            $data = $reader->all(); 
+              
+            $table_cname = \Schema::getColumnListing('contacts');
+            
+            $except = ['id','create_at','updated_at'];
+
+            $input = $request->all();
+           // $contact->categoryName = $cn;
+            $contact =  new Contact;
+            foreach ($data  as $key => $result) {
+                foreach ($table_cname as $key => $value) {
+                   if(in_array($value, $except )){
+                        continue;
+                   }
+                   if(isset($result->$value)) {
+                       $contact->$value = $result->$value; 
+                       $status = 1;
+                   } 
+                }
+                 if(isset($status)){
+                     $contact->save(); 
+                 }
+            } 
+           
+            if(isset($status)){
+                echo json_encode(['status'=>1,'message'=>'contact imported successfully!']);
+            }else{
+               echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']); 
+            }
+             
+            });
+
+        } catch (\Exception $e) {
+            echo json_encode(['status'=>0,'message'=>'Please select csv file!']); 
+            exit(); 
+        }
+        
+       
+    }
+
     /*
      * create  method
      * */
