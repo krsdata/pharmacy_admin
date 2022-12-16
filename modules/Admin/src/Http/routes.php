@@ -95,25 +95,6 @@ if (App::environment('prod')) {
         );
 
         
-
-        Route::bind('updatePlayerPoints', function ($value, $route) {
-            return Modules\Admin\Models\UpdatePlayerPoints::find($value);
-        });
-        Route::resource(
-            'admin/updatePlayerPoints',
-            'Modules\Admin\Http\Controllers\UpdatePlayerPointsController',
-            [
-            'names' => [
-                'edit' => 'updatePlayerPoints.edit',
-                'show' => 'updatePlayerPoints.show',
-                'destroy' => 'updatePlayerPoints.destroy',
-                'update' => 'updatePlayerPoints.update',
-                'store' => 'updatePlayerPoints.store',
-                'index' => 'updatePlayerPoints',
-                'create' => 'updatePlayerPoints.create',
-            ]
-                ]
-        );
         //wallets
          Route::bind('wallets', function ($value, $route) {
             return Modules\Admin\Models\Wallets::find($value);

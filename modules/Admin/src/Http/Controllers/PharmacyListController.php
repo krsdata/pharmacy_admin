@@ -17,7 +17,7 @@ use HTML;
 use Form;
 use Hash;
 use View;
-use URL;
+use URL; 
 use Lang;
 use Session;
 use Route;
@@ -26,9 +26,11 @@ use Modules\Admin\Http\Controllers\Controller;
 use Illuminate\Http\Dispatcher; 
 use Modules\Admin\Helpers\Helper as Helper;
 use Response;
+use App\Imports\ImportData;
+
 
 /**
- * Class AdminController
+ * Class AdminController import
  */
 class PharmacyListController extends Controller {
     /**
@@ -84,10 +86,33 @@ class PharmacyListController extends Controller {
          return view('packages::pharmacylist.index', compact('pharmacylist', 'page_title', 'page_action'));
    
     }
+    public function uploadFile($file)
+    {
+       
+        //Display File Name
+        $fileName = $file->getClientOriginalName();
 
+        //Display File Extension
+        $ext = $file->getClientOriginalExtension();
+        //Display File Real Path
+        $realPath = $file->getRealPath(); 
+        //Display File Mime Type
+        
+
+        $file_name = time().'.'.$ext;
+        $path = storage_path('csv');
+ 
+      //  chmod($path ,0777);
+        $file->move($path,$file_name);
+  
+      //  chmod($path.'/'.$file_name ,0777); 
+
+        return $path.'/'.$file_name;
+    }
 
     public function import(Request $request)
     {
+         
         try{
             $file = $request->file('importContact');
             
@@ -96,50 +121,78 @@ class PharmacyListController extends Controller {
                 exit(); 
             }
             $ext = $file->getClientOriginalExtension();
+            
             if($file==NULL || $ext!='csv'){
                 echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
                 exit(); 
             }
             $mime = $file->getMimeType();   
-           
-            $upload = $this->uploadFile($file);
-           
-            $rs =    \Excel::load($upload, function($reader)use($request) {
-
-            $data = $reader->all(); 
-              
-            $table_cname = \Schema::getColumnListing('contacts');
             
-            $except = ['id','create_at','updated_at'];
+                        
+            $path = $request->file('importContact')->getRealPath();
+            $data = array_map('str_getcsv', file($path));
+            $csv_data_coloumn = array_slice($data, 0,1);
+            $csv_data = array_slice($data, 1);
+            
+           // $data2 = [];
+            
+                $data_set = [];
+                $final_data = [];
+                foreach($csv_data as $key => $result_data)
+                {
+                    foreach($result_data as $key => $result_set)
+                    {
+                        if(isset($csv_data_coloumn[0][$key]))
+                        {
+                            $data_set[$csv_data_coloumn[0][$key]] =  $result_set;
+                        }
+                    }   
 
-            $input = $request->all();
-           // $contact->categoryName = $cn;
-            $contact =  new Contact;
-            foreach ($data  as $key => $result) {
-                foreach ($table_cname as $key => $value) {
-                   if(in_array($value, $except )){
-                        continue;
-                   }
-                   if(isset($result->$value)) {
-                       $contact->$value = $result->$value; 
-                       $status = 1;
-                   } 
+                    $final_data[] = $data_set;
+                   
                 }
-                 if(isset($status)){
-                     $contact->save(); 
-                 }
-            } 
-           
-            if(isset($status)){
-                echo json_encode(['status'=>1,'message'=>'contact imported successfully!']);
-            }else{
-               echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']); 
-            }
-             
-            });
+
+
+                    $table_cname = \Schema::getColumnListing('pharmacy_list');
+
+                  
+                    $status=0;
+                    foreach ((object)$final_data  as $key => $result) {
+                        $pl = [];      
+                        foreach ($result as $cname => $value) {
+
+                               
+                                if(in_array($cname, $table_cname )){
+                                    $pl[$cname] = $value??""; 
+                                    $status = 1;
+                                
+                                }
+                                    
+                        }
+                        if($status)
+                        {
+                            \DB::table('pharmacy_list')->updateOrInsert(
+                                [
+                                    'name' => $pl['name']
+                                ],
+                                $pl
+                            );
+                        }
+                       
+                        
+                        
+
+                    } 
+                    if(isset($status)){
+                        echo json_encode(['status'=>1,'message'=>'contact imported successfully!']);
+                    }else{
+                    echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']); 
+                    }
+                    
 
         } catch (\Exception $e) {
-            echo json_encode(['status'=>0,'message'=>'Please select csv file!']); 
+            
+            echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
             exit(); 
         }
         
